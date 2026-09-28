@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TarefasApp.MainPage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{AppThemeBinding
+        Light={StaticResource M3Surface},
+        Dark={StaticResource M3DarkSurface}}">
+
+    <Grid>
+
+        <Grid
+            Padding="32,24"
+            RowDefinitions="Auto,470,Auto"
+            RowSpacing="24"
+            WidthRequest="920"
+            HorizontalOptions="Center">
+
+            <!-- CABEÇALHO -->
+            <VerticalStackLayout
+                Grid.Row="0"
+                Spacing="4">
+
+                <Label
+                    Text="Minhas tarefas"
+                    Style="{StaticResource M3HeadlineLarge}" />
+
+                <Label
+                    Text="Organize e acompanhe suas atividades"
+                    Style="{StaticResource M3BodyMedium}" />
+
+            </VerticalStackLayout>
+
+
+            <!-- LISTA -->
+            <CollectionView
+                x:Name="ListaTarefas"
+                Grid.Row="1"
+                SelectionMode="Single"
+                SelectionChanged="ListaTarefas_SelectionChanged">
+
+                <CollectionView.ItemsLayout>
+
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="18" />
+
+                </CollectionView.ItemsLayout>
+
+
+                <!-- LISTA VAZIA -->
+                <CollectionView.EmptyView>
+
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Spacing="8"
+                        Padding="30">
+
+                        <Label
+                            Text="Nenhuma tarefa"
+                            Style="{StaticResource M3TitleLarge}"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="Adicione uma tarefa para começar."
+                            Style="{StaticResource M3BodyMedium}"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                </CollectionView.EmptyView>
+
+
+                <!-- CARD -->
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Border
+                            Padding="20"
+                            StrokeThickness="1"
+                            Stroke="{AppThemeBinding
+                                Light={StaticResource M3OutlineVariant},
+                                Dark={StaticResource M3DarkOutlineVariant}}"
+                            StrokeShape="RoundRectangle 16"
+                            BackgroundColor="{AppThemeBinding
+                                Light={StaticResource M3SurfaceContainer},
+                                Dark={StaticResource M3DarkSurfaceContainer}}">
+
+                            <Grid
+                                ColumnDefinitions="*,Auto"
+                                RowDefinitions="Auto,Auto,Auto"
+                                ColumnSpacing="16"
+                                RowSpacing="8">
+
+                                <!-- TÍTULO -->
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Text="{Binding Titulo}"
+                                    Style="{StaticResource M3TitleMedium}" />
+
+
+                                <!-- DESCRIÇÃO -->
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Text="{Binding Descricao}"
+                                    Style="{StaticResource M3BodyMedium}"
+                                    MaxLines="2"
+                                    LineBreakMode="TailTruncation" />
+
+
+                                <!-- CHIP DE PRIORIDADE -->
+                                <Border
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Margin="0,4,0,0"
+                                    Padding="12,5"
+                                    HorizontalOptions="Start"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 20">
+
+                                    <Border.Triggers>
+
+                                        <!-- ALTA -->
+                                        <DataTrigger
+                                            TargetType="Border"
+                                            Binding="{Binding Prioridade}"
+                                            Value="Alta">
+
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="{AppThemeBinding
+                                                    Light=#FFDAD6,
+                                                    Dark=#93000A}" />
+
+                                        </DataTrigger>
+
+
+                                        <!-- MÉDIA -->
+                                        <DataTrigger
+                                            TargetType="Border"
+                                            Binding="{Binding Prioridade}"
+                                            Value="Média">
+
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="{AppThemeBinding
+                                                    Light=#F9EFAF,
+                                                    Dark=#5C4B00}" />
+
+                                        </DataTrigger>
+
+
+                                        <!-- BAIXA -->
+                                        <DataTrigger
+                                            TargetType="Border"
+                                            Binding="{Binding Prioridade}"
+                                            Value="Baixa">
+
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="{AppThemeBinding
+                                                    Light=#C9E6FF,
+                                                    Dark=#004A77}" />
+
+                                        </DataTrigger>
+
+                                    </Border.Triggers>
+
+
+                                    <Label
+                                        Text="{Binding Prioridade}"
+                                        FontSize="12"
+                                        FontAttributes="Bold">
+
+                                        <Label.Triggers>
+
+                                            <!-- ALTA -->
+                                            <DataTrigger
+                                                TargetType="Label"
+                                                Binding="{Binding Prioridade}"
+                                                Value="Alta">
+
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="{AppThemeBinding
+                                                        Light=#410002,
+                                                        Dark=#FFDAD6}" />
+
+                                            </DataTrigger>
+
+
+                                            <!-- MÉDIA -->
+                                            <DataTrigger
+                                                TargetType="Label"
+                                                Binding="{Binding Prioridade}"
+                                                Value="Média">
+
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="{AppThemeBinding
+                                                        Light=#201B00,
+                                                        Dark=#FFE08A}" />
+
+                                            </DataTrigger>
+
+
+                                            <!-- BAIXA -->
+                                            <DataTrigger
+                                                TargetType="Label"
+                                                Binding="{Binding Prioridade}"
+                                                Value="Baixa">
+
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="{AppThemeBinding
+                                                        Light=#001E30,
+                                                        Dark=#C9E6FF}" />
+
+                                            </DataTrigger>
+
+                                        </Label.Triggers>
+
+                                    </Label>
+
+                                </Border>
+
+
+                                <!-- SETA -->
+                                <Label
+                                    Grid.RowSpan="3"
+                                    Grid.Column="1"
+                                    Text="›"
+                                    FontSize="30"
+                                    VerticalOptions="Center"
+                                    TextColor="{AppThemeBinding
+                                        Light={StaticResource M3OnSurfaceVariant},
+                                        Dark={StaticResource M3DarkOnSurfaceVariant}}" />
+
+                            </Grid>
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+
+            <!-- BOTÃO -->
+            <Button
+                Grid.Row="2"
+                Text="+  Adicionar tarefa"
+                Style="{StaticResource M3FilledButton}"
+                WidthRequest="190"
+                HorizontalOptions="End"
+                Clicked="AdicionarButton_Clicked" />
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

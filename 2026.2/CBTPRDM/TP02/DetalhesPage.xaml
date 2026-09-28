@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TarefasApp.DetalhesPage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{AppThemeBinding
+        Light={StaticResource M3Surface},
+        Dark={StaticResource M3DarkSurface}}">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="32,24"
+            Spacing="24"
+            WidthRequest="920"
+            HorizontalOptions="Center">
+
+            <!-- CABEÇALHO -->
+            <Grid
+                ColumnDefinitions="48,*"
+                ColumnSpacing="12">
+
+                <!-- BOTÃO VOLTAR -->
+                <Button
+                    Grid.Column="0"
+                    Text="←"
+                    FontSize="22"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    Padding="0"
+                    CornerRadius="24"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding
+                        Light={StaticResource M3OnSurface},
+                        Dark={StaticResource M3DarkOnSurface}}"
+                    VerticalOptions="Center"
+                    Clicked="VoltarButton_Clicked" />
+
+                <!-- TÍTULO DA PÁGINA -->
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    Spacing="4"
+                    VerticalOptions="Center">
+
+                    <Label
+                        Text="Detalhes da tarefa"
+                        FontSize="32"
+                        FontAttributes="None"
+                        TextColor="{AppThemeBinding
+                            Light={StaticResource M3OnSurface},
+                            Dark={StaticResource M3DarkOnSurface}}" />
+
+                    <Label
+                        Text="Confira as informações cadastradas"
+                        Style="{StaticResource M3BodyMedium}" />
+
+                </VerticalStackLayout>
+
+            </Grid>
+
+
+            <!-- CARD PRINCIPAL -->
+            <Border
+                Padding="28"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 18"
+                BackgroundColor="{AppThemeBinding
+                    Light={StaticResource M3SurfaceContainer},
+                    Dark={StaticResource M3DarkSurfaceContainer}}">
+
+                <VerticalStackLayout Spacing="22">
+
+                    <!-- TÍTULO -->
+                    <VerticalStackLayout Spacing="8">
+
+                        <Label
+                            Text="Título"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="{AppThemeBinding
+                                Light={StaticResource M3OnSurface},
+                                Dark={StaticResource M3DarkOnSurface}}" />
+
+                        <Border
+                            Padding="18"
+                            StrokeThickness="1"
+                            Stroke="{AppThemeBinding
+                                Light={StaticResource M3OutlineVariant},
+                                Dark={StaticResource M3DarkOutlineVariant}}"
+                            StrokeShape="RoundRectangle 14"
+                            BackgroundColor="{AppThemeBinding
+                                Light={StaticResource M3SurfaceContainerHigh},
+                                Dark={StaticResource M3DarkSurfaceContainerHigh}}">
+
+                            <Label
+                                Text="{Binding Titulo}"
+                                Style="{StaticResource M3TitleLarge}" />
+
+                        </Border>
+
+                    </VerticalStackLayout>
+
+
+                    <!-- DESCRIÇÃO -->
+                    <VerticalStackLayout Spacing="8">
+
+                        <Label
+                            Text="Descrição"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="{AppThemeBinding
+                                Light={StaticResource M3OnSurface},
+                                Dark={StaticResource M3DarkOnSurface}}" />
+
+                        <Border
+                            Padding="18"
+                            MinimumHeightRequest="100"
+                            StrokeThickness="1"
+                            Stroke="{AppThemeBinding
+                                Light={StaticResource M3OutlineVariant},
+                                Dark={StaticResource M3DarkOutlineVariant}}"
+                            StrokeShape="RoundRectangle 14"
+                            BackgroundColor="{AppThemeBinding
+                                Light={StaticResource M3SurfaceContainerHigh},
+                                Dark={StaticResource M3DarkSurfaceContainerHigh}}">
+
+                            <Label
+                                Text="{Binding Descricao}"
+                                Style="{StaticResource M3BodyMedium}"
+                                FontSize="16"
+                                VerticalOptions="Start" />
+
+                        </Border>
+
+                    </VerticalStackLayout>
+
+
+                    <!-- DATA E PRIORIDADE -->
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="16">
+
+                        <!-- DATA -->
+                        <VerticalStackLayout
+                            Grid.Column="0"
+                            Spacing="8">
+
+                            <Label
+                                Text="Data de criação"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="{AppThemeBinding
+                                    Light={StaticResource M3OnSurface},
+                                    Dark={StaticResource M3DarkOnSurface}}" />
+
+                            <Border
+                                HeightRequest="64"
+                                Padding="18,0"
+                                StrokeThickness="1"
+                                Stroke="{AppThemeBinding
+                                    Light={StaticResource M3OutlineVariant},
+                                    Dark={StaticResource M3DarkOutlineVariant}}"
+                                StrokeShape="RoundRectangle 14"
+                                BackgroundColor="{AppThemeBinding
+                                    Light={StaticResource M3SurfaceContainerHigh},
+                                    Dark={StaticResource M3DarkSurfaceContainerHigh}}">
+
+                                <Label
+                                    Text="{Binding DataCriacao, StringFormat='{0:dd/MM/yyyy}'}"
+                                    FontSize="16"
+                                    FontAttributes="None"
+                                    VerticalOptions="Center"
+                                    TextColor="{AppThemeBinding
+                                        Light={StaticResource M3OnSurface},
+                                        Dark={StaticResource M3DarkOnSurface}}" />
+
+                            </Border>
+
+                        </VerticalStackLayout>
+
+
+                        <!-- PRIORIDADE -->
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            Spacing="8">
+
+                            <Label
+                                Text="Prioridade"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="{AppThemeBinding
+                                    Light={StaticResource M3OnSurface},
+                                    Dark={StaticResource M3DarkOnSurface}}" />
+
+                            <Border
+                                HeightRequest="64"
+                                Padding="18,0"
+                                StrokeThickness="1"
+                                Stroke="{AppThemeBinding
+                                    Light={StaticResource M3OutlineVariant},
+                                    Dark={StaticResource M3DarkOutlineVariant}}"
+                                StrokeShape="RoundRectangle 14"
+                                BackgroundColor="{AppThemeBinding
+                                    Light={StaticResource M3SurfaceContainerHigh},
+                                    Dark={StaticResource M3DarkSurfaceContainerHigh}}">
+
+                                <!-- CHIP DA PRIORIDADE -->
+                                <Border
+                                    Padding="14,6"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 20">
+
+                                    <Border.Triggers>
+
+                                        <!-- ALTA -->
+                                        <DataTrigger
+                                            TargetType="Border"
+                                            Binding="{Binding Prioridade}"
+                                            Value="Alta">
+
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="{AppThemeBinding
+                                                    Light=#FFDAD6,
+                                                    Dark=#93000A}" />
+
+                                        </DataTrigger>
+
+                                        <!-- MÉDIA -->
+                                        <DataTrigger
+                                            TargetType="Border"
+                                            Binding="{Binding Prioridade}"
+                                            Value="Média">
+
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="{AppThemeBinding
+                                                    Light=#F9EFAF,
+                                                    Dark=#5C4B00}" />
+
+                                        </DataTrigger>
+
+                                        <!-- BAIXA -->
+                                        <DataTrigger
+                                            TargetType="Border"
+                                            Binding="{Binding Prioridade}"
+                                            Value="Baixa">
+
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="{AppThemeBinding
+                                                    Light=#C9E6FF,
+                                                    Dark=#004A77}" />
+
+                                        </DataTrigger>
+
+                                    </Border.Triggers>
+
+
+                                    <Label
+                                        Text="{Binding Prioridade}"
+                                        FontSize="12"
+                                        FontAttributes="Bold">
+
+                                        <Label.Triggers>
+
+                                            <!-- ALTA -->
+                                            <DataTrigger
+                                                TargetType="Label"
+                                                Binding="{Binding Prioridade}"
+                                                Value="Alta">
+
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="{AppThemeBinding
+                                                        Light=#410002,
+                                                        Dark=#FFDAD6}" />
+
+                                            </DataTrigger>
+
+                                            <!-- MÉDIA -->
+                                            <DataTrigger
+                                                TargetType="Label"
+                                                Binding="{Binding Prioridade}"
+                                                Value="Média">
+
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="{AppThemeBinding
+                                                        Light=#201B00,
+                                                        Dark=#FFE08A}" />
+
+                                            </DataTrigger>
+
+                                            <!-- BAIXA -->
+                                            <DataTrigger
+                                                TargetType="Label"
+                                                Binding="{Binding Prioridade}"
+                                                Value="Baixa">
+
+                                                <Setter
+                                                    Property="TextColor"
+                                                    Value="{AppThemeBinding
+                                                        Light=#001E30,
+                                                        Dark=#C9E6FF}" />
+
+                                            </DataTrigger>
+
+                                        </Label.Triggers>
+
+                                    </Label>
+
+                                </Border>
+
+                            </Border>
+
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- AÇÕES -->
+            <Grid
+                ColumnDefinitions="Auto,Auto"
+                ColumnSpacing="12"
+                HorizontalOptions="End">
+
+                <Button
+                    Grid.Column="0"
+                    Text="Editar tarefa"
+                    Style="{StaticResource M3TonalButton}"
+                    WidthRequest="170"
+                    Clicked="EditarButton_Clicked" />
+
+                <Button
+                    Grid.Column="1"
+                    Text="Excluir tarefa"
+                    Style="{StaticResource M3ErrorButton}"
+                    WidthRequest="170"
+                    Clicked="ExcluirButton_Clicked" />
+
+            </Grid>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
